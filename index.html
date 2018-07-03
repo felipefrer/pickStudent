@@ -1,12 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="pickStudent">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="pickStudent.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="lib/sprite/flags.css"/>
+    <script src="lib/angular/angular.js"></script>
+    <script src="pickStudent.js"></script>
+
     <title>ATC - Pick Student</title>
 </head>
-<body>
-    
+<body ng-Controller="pickStudentCtrl">
+    <div class="jumbotron">
+        <h3>{{App}}</h3>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    {{student}}
+                    <form name="studentForm">
+                        <input type="text" class="form-control" placeholder="Student Name" ng-model="student.name" ng-required="true" ng-maxlength="50">
+                        <select class="form-control" ng-model="student.country" ng-required="true" ng-options="country.name for country in countries">
+                            <option value="">Selecione a nationalidade</option>
+                        </select>
+                        <hr>
+                        <div>
+                            <button class="btn btn-primary btn-block" ng-click="AddStudent(student)">
+                                <span class="fas fa-user-plus"></span> 
+                                Add
+                            </button>
+                        </div>
+                        <div ng-if="studentForm.$valid">
+                            <button class="btn btn-danger btn-block">
+                                <span class="fas fa-user-times"></span> 
+                                Remove
+                            </button>
+                            </div>
+                    </form>                
+                </div>    
+                <div class="col">
+                    <table class="table table-striped">
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Nationality</th>
+                            <th></th>
+                        </tr>
+                        <tr ng-repeat="student in students">
+                            <td></td>
+                            <td>{{student.name}}</td>
+                            <td><img class="flag flag-{{student.country.code}}"/></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>    
 </body>
 </html>
