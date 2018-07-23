@@ -8,17 +8,7 @@ angular.module("pickStudent").controller("pickStudentCtrl", function ($scope, st
 
         countryAPI.getCountries().then(function successCallback(response){
 
-            var hoxWiCountries = response.data.results;
-
-            hoxWiCountriesUpperCase = hoxWiCountries.map(function (country) {
-
-                country.name = $filter('name')(country.name);
-                country.name = $filter('ellipsis')(country.name, 5);
-
-                return country;
-            });
-
-            $scope.countries = hoxWiCountriesUpperCase;
+            $scope.countries = response.data.results;
             
             // console.log($nameFilter($scope.countries[0]));
                 
@@ -43,16 +33,11 @@ angular.module("pickStudent").controller("pickStudentCtrl", function ($scope, st
 
     $scope.AddStudent = function (student) {
 
-        console.log($filter('myDate')(student.date));
-
-        var newStudent = {name:student.name, country: {name:student.country.name, code:student.country.code }};
-
-        studentAPI.addStudent(JSON.stringify(newStudent));
-        
+        studentAPI.addStudent(student);
         loadStudents();
     };
 
     loadCountries();
     loadStudents();
-    console.log($scope.Id);
+    console.log($scope.$id);
 });

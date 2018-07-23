@@ -2,9 +2,9 @@ angular.module('pickStudent').filter('myDate', function () {
 
     return function (input) {
 
-        if(!isNaN(input.substr()))
+        if(!isNaN(input.substring(input.length-1, 1)))
         {
-            console.log("It is not a number");
+            input = "It is not a number";
         }
         
         return input;
