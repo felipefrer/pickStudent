@@ -6,23 +6,35 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="pickStudent.css">
+    <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="lib/sprite/flags.css"/>
+    
     <script src="lib/angular/angular.js"></script>
-    <script src="pickStudent.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers/pickStudentCtrl.js"></script>
+    <script src="js/services/studentAPIService.js"></script>
+    <script src="js/services/countryAPIService.js"></script>
+    <script src="js/value/configValue.js"></script>
+    <script src="js/services/serialGeneratorAPIService.js"></script>
+    <script src="js/config/serialGeneratorConfig.js"></script>
+    <script src="js/config/appConfig.js"></script>
+    <script src="js/Filters/nameFilter.js"></script>
+    <script src="js/Filters/ellipsisFilter.js"></script>
+    <script src="js/Filters/myDateFilter.js"></script>
 
     <title>ATC - Pick Student</title>
 </head>
 <body ng-Controller="pickStudentCtrl">
     <div class="jumbotron">
         <h3>{{App}}</h3>
+        <hr>
         <div class="container">
             <div class="row">
                 <div class="col">
-                    {{student}}
                     <form name="studentForm">
                         <input type="text" class="form-control" placeholder="Student Name" ng-model="student.name" ng-required="true" ng-maxlength="50">
+                        <input type="text" class="form-control" placeholder="Date" ng-model="student.date" ng-required="true">
                         <select class="form-control" ng-model="student.country" ng-required="true" ng-options="country.name for country in countries">
                             <option value="">Selecione a nationalidade</option>
                         </select>
@@ -59,6 +71,8 @@
                 </div>
             </div>
         </div>
+        <hr>
+        <div ng-include="'view/footer.html'"></div>
     </div>    
 </body>
 </html>
